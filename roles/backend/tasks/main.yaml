@@ -43,7 +43,7 @@
     path: /app
 
 - name: Copy a new "backend.service" file into place, backing up the original if it differs from the copied version
-  ansible.builtin.template:
+  ansible.builtin.copy:
       src: backend.service
       dest: /etc/systemd/system/backend.service
       backup: yes
