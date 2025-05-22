@@ -9,21 +9,26 @@
     state: started
     enabled: yes
 
-- name: Remove the default content that web server is serving
-  ansible.builtin.file:
-    path: /usr/shares/nginx/html/*
-    state: absent
+- name: include from common
+  include_role:
+    name: common
+    tasks_from: main # tasks from common main.yaml (we can create with any name)
 
-- name: Download frontend content
-  ansible.builtin.get_url:
-    url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
-    dest: /tmp/frontend.zip
+# - name: delete Html directory
+#   ansible.builtin.file:
+#     path: /usr/shares/nginx/html/*
+#     state: absent
 
-- name: Extract the frontend content
-  ansible.builtin.unarchive:
-    src: /tmp/frontend.zip
-    dest: /usr/share/nginx/html
-    remote_src: yes 
+# - name: Download frontend content
+#   ansible.builtin.get_url:
+#     url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+#     dest: /tmp/frontend.zip
+
+# - name: unzip the frontend content
+#   ansible.builtin.unarchive:
+#     src: /tmp/frontend.zip
+#     dest: /usr/share/nginx/html
+#     remote_src: yes 
 
 - name: Copy a new "backend.service" file into place, backing up the original if it differs from the copied version
   ansible.builtin.template:
