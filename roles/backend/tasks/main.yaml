@@ -17,24 +17,30 @@
     name: expense
     state: present
 
-- name: Create a directory if not exist
-  ansible.builtin.file:
-    path: /app
-    state: directory  
-    mode: '755'
+
+- name: Include from Common role
+  include_role:
+    name: common
+    tasks_from: main
+    
+# - name: Create a directory if not exist
+#   ansible.builtin.file:
+#     path: /app
+#     state: directory  
+#     mode: '755'
 
 
-- name: Download Backend code
-  ansible.builtin.get_url:
-    url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
-    dest: /tmp/backend.zip
-    mode: '755'
+# - name: Download Backend code
+#   ansible.builtin.get_url:
+#     url:  https://expense-builds.s3.us-east-1.amazonaws.com/expense-backend-v2.zip
+#     dest: /tmp/backend.zip
+#     mode: '755'
 
-- name: Extract backend code into /app
-  ansible.builtin.unarchive:
-    src: /tmp/backend.zip
-    dest: /app
-    remote_src: yes 
+# - name: Extract backend code into /app
+#   ansible.builtin.unarchive:
+#     src: /tmp/backend.zip
+#     dest: /app
+#     remote_src: yes 
 
 - name: Install NPM libraries
   ansible.builtin.npm:
