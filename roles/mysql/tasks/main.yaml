@@ -2,7 +2,7 @@
   hosts: mysql
   become: yes
   vars: 
-    mysql_root_password: "{{ mysql_root_password }}"
+    mysql_root_password: mysql_root_password 
   tasks: 
   - name: Install MySQL libraries
     ansible.builtin.pip:
@@ -27,7 +27,7 @@
   - name: Get MySQL version
     community.mysql.mysql_info:
       login_user: root
-      login_password: "{{ mysql_root_password }}"
+      login_password: " {{ mysql_root_password }} "
       login_host: mysql.reddytraders.shop
     register: mysql_info
     ignore_errors: true
@@ -37,9 +37,9 @@
     ansible.builtin.debug:
       msg: "mysql_info: {{ mysql_info }}"
 
-  # - name: setup root login_password
-  #   ansible.builtin.command: mysql_secure_installation --set-root-pass ExpenseApp@1
-  #   when: mysql_info.failed is true
+  - name: setup root login_password
+    ansible.builtin.command: " mysql_secure_installation --set-root-pass {{ mysql_root_password }} "
+    when: mysql_info.failed is true
 
   # - name: Query data from a MySQL table
   #   community.mysql.mysql_query:
