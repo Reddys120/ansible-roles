@@ -43,9 +43,9 @@
     path: /app
 
 - name: Copy a new "backend.service" file into place, backing up the original if it differs from the copied version
-  ansible.builtin.copy:
+  ansible.builtin.template:
       src: backend.service.j2
-      dest: /etc/systemd/system/backend.service.j2
+      dest: /etc/systemd/system/backend.service
       backup: yes
 
 - name: Install MySQL libraries
