@@ -19,8 +19,6 @@
 
 
 - name: Include from Common role
-  tags:
-    - Deployment
   include_role:
     name: common
     tasks_from: main
