@@ -1,8 +1,9 @@
 - name: Configure Mysql server
   hosts: mysql
   become: yes
-  vars: 
+  vars/main.yaml: 
     mysql_root_password: mysql_root_password 
+
   tasks: 
   - name: Install MySQL libraries
     ansible.builtin.pip:
