@@ -5,7 +5,7 @@
   
 
 - name: Create APP directory
-  ansible.builtin.fle:
+  ansible.builtin.file:
     path: "{{ APP_LOCATION }}" # backend /app # frontend /use/share/nginx/html
     state: directory  
   
