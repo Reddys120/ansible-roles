@@ -36,7 +36,7 @@
     name: nginx
     state: restarted
   notify:
-  - Restart Nginx 
+    - Restart Nginx 
   register: Logs
 
 - name: print result
