@@ -3,5 +3,3 @@
   become: yes
   roles:
   - mysql 
-  vars: 
-    mysql_root_password: mysql_root_password 
