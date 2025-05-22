@@ -19,10 +19,12 @@
 
 
 - name: Include from Common role
+  tags:
+    - Deployment
   include_role:
     name: common
     tasks_from: main
-    
+
 # - name: Create a directory if not exist
 #   ansible.builtin.file:
 #     path: /app
@@ -43,6 +45,8 @@
 #     remote_src: yes 
 
 - name: Install NPM libraries
+  tags:
+    - Deployment
   ansible.builtin.npm:
     name: npm
     state: present
@@ -79,6 +83,8 @@
 
   #mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pExpenseApp@1 < /app/schema/backend.sql  - name: Restart backend service, in all cases, also issue daemon-reload to pick up config changes
 - name: systemctl restart
+  tags:
+    - Deployment
   ansible.builtin.systemd_service:
     name: backend
     state: restarted
